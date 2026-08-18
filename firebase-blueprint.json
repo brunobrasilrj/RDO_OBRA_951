@@ -1,0 +1,89 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account info and roles in the RDO system",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "passwordHash": { "type": "string" },
+        "role": { "type": "string", "enum": ["Engenheiro Gestor / Administrador", "Engenheiro de Campo", "Fiscal de Obra", "Técnico de Segurança", "Apontador de Obra", "Coordenador", "Apontador"] },
+        "obraDefault": { "type": "string" },
+        "trechoDefault": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "lastLoginAt": { "type": "string" }
+      },
+      "required": ["id", "email", "name", "role"]
+    },
+    "AccessLog": {
+      "title": "AccessLog",
+      "description": "Real-time user audit and telemetry log tracking app usage, login, saves and exports",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "userRole": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "userAgent": { "type": "string" }
+      },
+      "required": ["id", "userName", "userEmail", "action", "timestamp", "date", "time"]
+    },
+    "RDO": {
+      "title": "RDO",
+      "description": "Relatório Diário de Obra (RDO)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "contratada": { "type": "string" },
+        "obra": { "type": "string" },
+        "contrato": { "type": "string" },
+        "data": { "type": "string" },
+        "pagina": { "type": "string" },
+        "trecho": { "type": "string" },
+        "equipe": { "type": "string" },
+        "clima": { "type": "object" },
+        "pluviometro": { "type": "object" },
+        "solo": { "type": "string" },
+        "jornada": { "type": "object" },
+        "roles": { "type": "object" },
+        "totalAdmin": { "type": "number" },
+        "totalCampo": { "type": "number" },
+        "totalEfetivo": { "type": "number" },
+        "equipments": { "type": "array" },
+        "dds": { "type": "string" },
+        "atividades": { "type": "string" },
+        "observacoes": { "type": "string" },
+        "photos": { "type": "array" },
+        "signatures": { "type": "object" },
+        "createdBy": { "type": "string" },
+        "createdByName": { "type": "string" },
+        "createdByEmail": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "data", "obra", "contratada"]
+    }
+  },
+  "firestore": {
+    "/rdos/{rdoId}": {
+      "schema": "RDO",
+      "description": "Collaborative database of all RDOs accessible to managers and field engineers"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Registered users profiles and credentials"
+    },
+    "/access_logs/{logId}": {
+      "schema": "AccessLog",
+      "description": "Audit trail log tracking user access by name, email, date and time"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Gerenciador de RDO - SEEL Engenharia",
+  "description": "Sistema de Relatório Diário de Obras (RDO) com suporte offline, sincronização, gestão de efetivo, maquinário, fotos de campo e exportação em PDF/Excel.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
